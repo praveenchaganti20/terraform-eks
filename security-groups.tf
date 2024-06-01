@@ -6,16 +6,12 @@ resource "aws_security_group" "all_worker_mgmt" {
 
 resource "aws_security_group_rule" "all_worker_mgmt_ingress" {
   description       = "allow inbound traffic from eks"
-  from_port         = 0
+  from_port         = 443
   protocol          = "-1"
-  to_port           = 0
+  to_port           = 443
   security_group_id = aws_security_group.all_worker_mgmt.id
   type              = "ingress"
-  cidr_blocks = [
-    "10.0.0.0/8",
-    "172.16.0.0/12",
-    "192.168.0.0/16",
-  ]
+  cidr_blocks       = ["0.0.0.0/0"]
 }
 
 resource "aws_security_group_rule" "all_worker_mgmt_egress" {
